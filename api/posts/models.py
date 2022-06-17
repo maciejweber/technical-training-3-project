@@ -1,7 +1,9 @@
+from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth import get_user_model
 
 from categories.models import Category
+from cities.models import City
 
 User = get_user_model()
 
@@ -15,7 +17,7 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     salary_from = models.IntegerField()
     salary_to = models.IntegerField()
-    location = models.CharField(max_length=40)
+    location = models.ForeignKey(City, on_delete=models.CASCADE)
     contact_email = models.CharField(max_length=100)
 
     def __str__(self) -> str:
