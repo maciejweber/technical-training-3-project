@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PostContentActivity"
+    android:background="#e0e0e0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/green_main"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/black">
+
+        </LinearLayout>
+        <!--Title of the post-->
+        <TextView
+            android:id="@+id/contentTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textSize="23sp"
+            android:text="Post title"
+            android:fontFamily="@font/numans"
+            android:textStyle="bold"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/contentCompany"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/numans"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:textStyle="bold|italic"
+                tools:text="Company name" />
+
+            <TextView
+                android:id="@+id/contentLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_below="@id/contentCompany"
+                android:fontFamily="@font/numans"
+                android:maxLines="1"
+                android:text="Location"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/contentCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contentLocation"
+                android:fontFamily="@font/numans"
+                android:padding="10dp"
+                android:paddingEnd="5dp"
+                android:text="Language"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/contentSalary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_below="@id/contentCategory"
+                android:fontFamily="@font/numans"
+                android:maxLines="2"
+                android:text="Salary bracket:  "
+                android:textColor="@color/white"
+                android:textStyle="bold|italic" />
+            <TextView
+                android:id="@+id/contentContact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_below="@id/contentSalary"
+                android:fontFamily="@font/numans"
+                android:maxLines="2"
+                android:text="Contact  "
+                android:textColor="@color/white"
+                android:textStyle="bold|italic" />
+            <TextView
+                android:id="@+id/contentAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_below="@id/contentContact"
+                android:fontFamily="@font/numans"
+                android:maxLines="2"
+                android:text="author  "
+                android:textColor="@color/white"
+                android:textStyle="bold|italic" />
+
+            <TextView
+                android:id="@+id/contentDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/contentAuthor"
+                android:fontFamily="@font/numans"
+                android:maxLines="2"
+                android:padding="10dp"
+                android:text="Posted on: "
+                android:textColor="@color/white"
+                android:textStyle="bold|italic" />
+
+
+
+        </RelativeLayout>
+
+        <!--Post content-->
+        <WebView
+            android:id="@+id/contentWebView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

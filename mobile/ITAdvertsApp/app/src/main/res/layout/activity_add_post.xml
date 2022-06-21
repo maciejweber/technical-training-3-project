@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentTop="true"
+    android:fillViewport="true"
+    tools:context=".AddPostActivity"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/relativeBanner"
+            >
+
+            <ImageView
+                android:id="@+id/barImage"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:src="@color/green_main" />
+
+            <TextView
+                android:id="@+id/newPostTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/numans"
+                android:text="Create new posting"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/relativeBanner"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/titleTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/numans"
+                android:text="Post title "
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/titleET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/titleTV"
+                android:hint="Insert title"
+                android:maxLines="1"
+                android:paddingLeft="10dp" />
+
+            <TextView
+                android:id="@+id/companyTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleET"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/numans"
+                android:text="Company name "
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/companyET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/companyTV"
+                android:hint="Insert company name"
+                android:maxLines="1"
+                android:paddingLeft="10dp" />
+
+            <TextView
+                android:id="@+id/contentTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/companyET"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/numans"
+                android:text="Post content "
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/contentET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/contentTV"
+                android:hint="Insert content of post"
+                android:maxLines="4"
+                android:paddingLeft="10dp" />
+
+            <LinearLayout
+                android:id="@+id/linearSalary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contentET"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/salary_fromTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/numans"
+                    android:gravity="center"
+                    android:text="Salary from "
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/salary_toTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/numans"
+                    android:gravity="center"
+                    android:text="Salary to "
+                    android:textColor="@color/black"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearSalaryET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linearSalary"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/salary_fromET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:maxLines="1"
+                    android:gravity="center"
+                    android:hint="Salary min amount" />
+
+                <EditText
+                    android:id="@+id/salary_toET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:hint="Salary max amount" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/categoryTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/linearSalaryET"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/numans"
+                android:text="Language "
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <Spinner
+                android:id="@+id/categorySpinner"
+                android:layout_width="@android:dimen/thumbnail_height"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/categoryTV"
+                android:background="@android:drawable/btn_dropdown" />
+
+
+            <TextView
+                android:id="@+id/locationTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/categorySpinner"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/numans"
+                android:text="Location "
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <Spinner
+                android:id="@+id/locationSpinner"
+                android:layout_width="@android:dimen/thumbnail_height"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/locationTV"
+                android:background="@android:drawable/btn_dropdown" />
+
+            <TextView
+                android:id="@+id/contactTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/locationSpinner"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/numans"
+                android:text="Contant Information "
+                android:textColor="@color/black"
+                android:textSize="22sp" />
+
+            <EditText
+                android:id="@+id/contactET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/contactTV"
+                android:layout_marginTop="5dp"
+                android:hint="Insert contact information"
+                android:maxLines="2"
+                android:paddingLeft="10dp" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnPost"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contactET"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/button_bg"
+                android:fontFamily="@font/numans"
+                android:padding="5dp"
+                android:text="Add Post"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+
+
+</androidx.core.widget.NestedScrollView>

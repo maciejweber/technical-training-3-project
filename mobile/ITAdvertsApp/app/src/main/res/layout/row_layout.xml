@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:padding="10dp"
+    android:background="@drawable/recycler_bg">
+
+    <ImageButton
+        android:id="@+id/btn_more"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_baseline_navigate_next_24"
+        app:tint="@color/black" />
+    <!--Title of a post -->
+    <TextView
+        android:id="@+id/postTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_toStartOf="@+id/btn_more"
+        android:fontFamily="@font/numans"
+        android:text="Tytuł postu"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/companyTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/postTitle"
+        android:layout_marginTop="10dp"
+        android:layout_toStartOf="@id/btn_more"
+        android:fontFamily="@font/numans"
+        android:text="Nazwa firmy i data postu"
+        android:textColor="@color/black" />
+
+    <!--1st line of a post -->
+    <TextView
+        android:id="@+id/locationTV"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/companyTV"
+        android:layout_marginTop="10dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/numans"
+        android:maxLines="1"
+        android:text="Lokalizacja: "
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/categoryTV"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/companyTV"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/locationTV"
+        android:ellipsize="end"
+        android:gravity="right"
+        android:fontFamily="@font/numans"
+        android:maxLines="1"
+        android:text="Kategoria"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/contentSalary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/locationTV"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/numans"
+        android:maxLines="2"
+        android:text="Salary bracket:  "
+        android:textColor="@color/black" />
+    <!--    <TextView-->
+    <!--        android:id="@+id/salaryTo"-->
+    <!--        android:layout_width="200dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_below="@id/categoryTV"-->
+    <!--        android:layout_marginTop="5dp"-->
+    <!--        android:layout_toEndOf="@id/salaryFrom"-->
+    <!--        android:ellipsize="end"-->
+    <!--        android:fontFamily="@font/numans"-->
+    <!--        android:maxLines="1"-->
+    <!--        android:text="Pensja do: "-->
+    <!--        android:textColor="@color/black" />-->
+
+
+</RelativeLayout>
