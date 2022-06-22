@@ -108,18 +108,14 @@ public class AddPostActivity extends AppCompatActivity {
             }
         });
     }
-
     private void addNewPost() {
-
-
-
         String title = titleET.getText().toString();
         String company = companyET.getText().toString();
         String content = contentET.getText().toString();
         String salary_from = salary_fromET.getText().toString();
         String salary_to = salary_toET.getText().toString();
         String contact = contactET.getText().toString();
-        long location = locationSpinner.getSelectedItemId() + 6;
+        long location = locationSpinner.getSelectedItemId() + 5;
         ArrayList<Integer> list = new ArrayList<Integer>();
         list.add(1);
         list.add(3);
