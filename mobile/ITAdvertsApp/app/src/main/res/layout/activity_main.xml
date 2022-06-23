@@ -36,7 +36,7 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/numans"
-                android:hint="Search posts"
+                android:hint="Search title or company"
                 android:inputType="textPersonName"
                 android:padding="10dp"
                 android:textColor="@color/white"

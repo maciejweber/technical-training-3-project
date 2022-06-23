@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -29,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/numans"
-                android:text="Create a new post"
+                android:text="Edit your post"
                 android:textColor="@color/white"
                 android:textSize="26sp"
                 android:textStyle="bold" />
@@ -184,7 +185,7 @@
                 android:layout_width="@android:dimen/thumbnail_height"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/categoryTV"
-                />
+                 />
 
 
             <TextView
@@ -204,7 +205,7 @@
                 android:layout_width="@android:dimen/thumbnail_height"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/locationTV"
-                />
+                 />
 
             <TextView
                 android:id="@+id/contactTV"
@@ -229,17 +230,17 @@
                 android:paddingLeft="6dp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnPost"
+                android:id="@+id/btnEditPost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/contactET"
                 android:layout_centerHorizontal="true"
-                android:layout_marginStart="50dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginStart="50dp"
                 android:background="@drawable/button_bg"
                 android:fontFamily="@font/numans"
                 android:padding="5dp"
-                android:text="Add post"
+                android:text="Edit post"
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 

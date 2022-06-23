@@ -52,6 +52,7 @@ public class PostContentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
         Intent intent = new Intent(PostContentActivity.this, MainActivity.class);
         startActivity(intent);
     }
@@ -64,8 +65,7 @@ public class PostContentActivity extends AppCompatActivity {
 //        actionBar = getSupportActionBar();
 //        actionBar.setDisplayShowHomeEnabled(true);
 //        actionBar.setDisplayHomeAsUpEnabled(true);
-        SharedPreferences mPrefs = getSharedPreferences("My_Pref",0);
-        String token = mPrefs.getString("Authorization", "");
+
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading post content...");
@@ -92,6 +92,8 @@ public class PostContentActivity extends AppCompatActivity {
         contentWebView.setWebViewClient(new WebViewClient());
         contentWebView.setWebChromeClient(new WebChromeClient());
         //#endregion
+        loadPostContent();
+
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,23 +116,46 @@ public class PostContentActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
-
                 AlertDialog dialog = builder.create();
                 dialog.show();
+            }
+        });
 
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PostContentActivity.this, EditPostActivity.class);
+                intent.putExtra("postId", postId);
+                startActivity(intent);
 
             }
         });
 
+
+        SharedPreferences mPrefs = getSharedPreferences("My_Pref",0);
+        String token = mPrefs.getString("Authorization", "");
+        String email = mPrefs.getString("Email", "");
+        String author = mPrefs.getString("Author", "");
+        Log.d(TAG, "SharedPreference author: "+author);
+        Log.d(TAG, "SharedPreference token: "+token);
+        Log.d(TAG, "SharedPreference email: "+email);
+
         if(token.equals("")){
             btnEdit.setVisibility(View.GONE);
             btnDelete.setVisibility(View.GONE);
-        }else{
+        }else if(email.equals(author))
+        {
             btnEdit.setVisibility(View.VISIBLE);
             btnDelete.setVisibility(View.VISIBLE);
+        } else
+        {
+            btnDelete.setVisibility(View.VISIBLE);
+            btnEdit.setVisibility(View.GONE);
         }
 
-        loadPostContent();
+        SharedPreferences preferences = getSharedPreferences("My_Pref", 0);
+//        preferences.edit().remove("Email").apply();
+        preferences.edit().remove("Author").apply();
     }
 
     private void deletePost() {
@@ -161,12 +186,12 @@ public class PostContentActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void loadPostContent() {
+    public void loadPostContent() {
         progressDialog.show();
 
         SharedPreferences mPrefs = getSharedPreferences("My_Pref",0);
         String token = mPrefs.getString("Authorization", "");
-        Toast.makeText(this, "POST CONTENT TOKEN="+token, Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "loadPostContent: Token= "+token);
         String url = "https://technical-training-3.herokuapp.com/api/posts/" + postId;
         Log.d(TAG, "loadPostContent: URL = " + url);
 
@@ -183,13 +208,6 @@ public class PostContentActivity extends AppCompatActivity {
                     String content = object.getString("content");
                     String company = object.getString("company");
                     String location = object.getJSONObject("location").getString("name");
-
-//                    String language = "";
-//                    for(int i = 0; i<object.getJSONArray("category").length(); i++){
-//                        language = object.getJSONArray("category").getJSONObject(i).getString("name");
-//                        Toast.makeText(PostContentActivity.this, ""+language, Toast.LENGTH_SHORT).show();
-//                    }
-
                     String category = object.getJSONArray("category").getJSONObject(0).getString("name");
                     Log.d(TAG, "onResponse: category"+category);
                     String salary_from = object.getString("salary_from");
@@ -198,20 +216,11 @@ public class PostContentActivity extends AppCompatActivity {
                     String author = object.getString("author");
                     String created_on = object.getString("created_on");
 
-//                    // date conversion
-//                    String gmtDate = created_on;
-//                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); //   2022-06-06T06:53:00-07:00
-//                    SimpleDateFormat dateFormat2 = new SimpleDateFormat("dd/MM/yyyy K:mm a"); // 06/06/2022 15:53
-//                    String formattedDate = "";
-//                    try {
-//                        Date date = dateFormat.parse(gmtDate);
-//                        formattedDate = dateFormat2.format(date);
-//
-//
-//                    } catch (Exception e) {
-//                        formattedDate = created_on;
-//                        e.printStackTrace();
-//                    }
+                    SharedPreferences mPrefs = getSharedPreferences("My_Pref", 0);
+                    SharedPreferences.Editor editor = mPrefs.edit();
+                    editor.putString("Author", ""+author);
+                    editor.apply();
+
                     //set data
 
                     contentTitle.setText(title);
@@ -220,7 +229,7 @@ public class PostContentActivity extends AppCompatActivity {
                     contentCategory.setText("Required language: " + category);
                     contentSalary.setText("Salary bracket: " + salary_from + "-" + salary_to + "$");
                     contentContact.setText("Contact:" + contact_email);
-                    contentAuthor.setText("Author: "+author);
+                    contentAuthor.setText(author);
                     contentDate.setText(created_on);
                     contentWebView.loadDataWithBaseURL(null, content, "text/html", ENCODING, null);
 

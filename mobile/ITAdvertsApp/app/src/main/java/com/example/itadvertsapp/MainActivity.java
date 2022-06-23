@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
@@ -28,7 +29,8 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView postsRV;
-    private ImageButton addBtn;
+    private ImageButton addBtn, searchBtn;
+    private EditText searchEdt;
 
     private String url = "";
     private ArrayList<ModelPost> postArrayList;
@@ -54,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         postsRV = findViewById(R.id.postsRV);
         addBtn = findViewById(R.id.addBtn);
+        searchBtn = findViewById(R.id.searchBtn);
+        searchEdt = findViewById(R.id.searchEdt);
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Please wait...");
 
@@ -79,8 +83,98 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        searchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                postArrayList = new ArrayList<>();
+                postArrayList.clear();
+                adapterPost.notifyDataSetChanged();
+
+                String query = searchEdt.getText().toString().trim();
+                if (query.equals("")){
+                    loadPosts();
+                }
+                else  {
+                    searchPosts(query);
+                }
+            }
+
+        });
 
 
+    }
+
+    private void searchPosts(String query) {
+        progressDialog.show();
+
+        url = "https://technical-training-3.herokuapp.com/api/posts?search="+query;
+        Log.d(TAG, "loadPosts: URL = "+url);
+
+        //GET Request
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                progressDialog.dismiss();
+                Log.d(TAG, "onResponse: "+response);
+
+                //try for json data
+                try{
+                    //get data
+                    JSONArray jsonArray = new JSONArray(response);
+                    for (int i = 0; i <= jsonArray.length()-1; i++){
+                        try{
+                            JSONObject object = jsonArray.getJSONObject(i);
+                            String id = object.getString("id");
+                            String title = object.getString("title");
+                            String company = object.getString("company");
+//                            String category = "placeholder";
+                            String category = object.getJSONArray("category").getJSONObject(0).getString("name");
+                            String salary_from = object.getString("salary_from");
+                            String salary_to = object.getString("salary_to");
+                            String location = object.getString("location");
+                            String formatted_date = object.getString("formatted_date");
+
+                            ModelPost modelPost = new ModelPost(
+                                    ""+ id,
+                                    ""+ title,
+                                    ""+ company + " / " + formatted_date,
+                                    "Language: "+category,
+                                    "Salary bracket: "+ salary_from + "-" +salary_to,
+                                    "",
+                                    ""+ location,
+                                    ""
+                            );
+                            postArrayList.add(modelPost);
+
+                        } catch (JSONException e) {
+                            Log.d(TAG, "onResponse catch 1: "+e.getMessage());
+                            Toast.makeText(MainActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    //adapter set up
+                    adapterPost = new AdapterPost(MainActivity.this, postArrayList);
+                    postsRV.setAdapter(adapterPost);
+                    progressDialog.dismiss();
+
+                } catch (JSONException e) {
+                    Log.d(TAG, "onResponse catch 2: "+e.getMessage());
+                    Toast.makeText(MainActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d(TAG, "onErrorResponse: " + error.getMessage());
+                Toast.makeText(MainActivity.this, "" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+        });
+
+        //request queue
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 
     private void loadPosts() {

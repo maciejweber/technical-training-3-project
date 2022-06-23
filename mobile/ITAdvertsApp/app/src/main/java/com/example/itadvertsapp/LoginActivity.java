@@ -125,10 +125,11 @@ public class LoginActivity extends AppCompatActivity {
                             SharedPreferences mPrefs = getSharedPreferences("My_Pref", 0);
                             SharedPreferences.Editor editor = mPrefs.edit();
                             editor.putString("Authorization", "Token "+auth);
+                            editor.putString("Email", ""+email);
                             editor.apply();
 
-                            String token = mPrefs.getString("Authorization", "");
-                            Toast.makeText(LoginActivity.this, "TOKEN ="+token, Toast.LENGTH_SHORT).show();
+                            String email = mPrefs.getString("Email", "");
+                            Toast.makeText(LoginActivity.this, "Email ="+email, Toast.LENGTH_SHORT).show();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
