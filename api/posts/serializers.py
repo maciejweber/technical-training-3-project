@@ -58,6 +58,8 @@ class PostDetailSerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(
         queryset=Category.objects.all(), many=True)
     author = serializers.ReadOnlyField(source='author.email')
+    created_on = serializers.DateTimeField(
+        format="%Y-%m-%d %H:%M", read_only=True)
     salary_from = serializers.IntegerField()
     salary_to = serializers.IntegerField()
     location = serializers.PrimaryKeyRelatedField(
