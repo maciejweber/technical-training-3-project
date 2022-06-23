@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         preferences.edit().remove("Authorization").apply();
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
+        Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
     }
 
     @Override

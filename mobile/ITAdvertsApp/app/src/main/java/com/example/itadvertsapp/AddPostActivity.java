@@ -87,20 +87,28 @@ public class AddPostActivity extends AppCompatActivity {
         List<String> locations = Arrays.asList("San Diego", "Los Angeles", "New York", "Houston", "Austin", "San Francisco");
         List<String> categories = Arrays.asList("C++", "C#", "Python", "JavaScript", "Java");
 
-        ArrayAdapter<String> locationsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, locations);
-        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+        ArrayAdapter<String> locationsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, locations);
+        ArrayAdapter<String> categoriesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, categories);
 
         locationSpinner.setAdapter(locationsAdapter);
         categorySpinner.setAdapter(categoriesAdapter);
+
 
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (titleET.getText().toString().equals("") || companyET.getText().toString().equals("") ||
                         contactET.getText().toString().equals("") || salary_fromET.getText().toString().equals("") ||
-                        salary_toET.getText().toString().equals("") || contactET.getText().toString().equals("")) {
+                        salary_toET.getText().toString().equals("") || contactET.getText().toString().equals(""))
+                {
                     Toast.makeText(AddPostActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
-                } else {
+                }
+                else if(titleET.getText().length() >= 50)
+                {
+                    Toast.makeText(AddPostActivity.this, "Your title is too long, max characters allowed = 50", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
                     addNewPost();
                     Intent intent = new Intent(AddPostActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -135,8 +143,6 @@ public class AddPostActivity extends AppCompatActivity {
         String url = "https://technical-training-3.herokuapp.com/api/posts/";
 
         JSONObject jsonObject = new JSONObject();
-        JSONObject jsonObject1 = new JSONObject();
-
         try {
             jsonObject.put("title", title);
             jsonObject.put("company", company);
