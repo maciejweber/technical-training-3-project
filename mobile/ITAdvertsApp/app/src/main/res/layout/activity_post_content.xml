@@ -13,25 +13,58 @@
         android:background="@color/green_main"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/black">
+            android:layout_margin="10dp">
 
-        </LinearLayout>
+            <TextView
+                android:id="@+id/contentTitle"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/numans"
+                android:padding="10dp"
+                android:text="Post title"
+                android:background="@drawable/title_lines"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/contentAuthor"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:gravity="end"
+                android:fontFamily="@font/numans"
+                android:maxLines="2"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:text="author  "
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/contentDate"
+                android:layout_width="150dp"
+                android:gravity="end"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/contentAuthor"
+                android:layout_alignParentEnd="true"
+                android:fontFamily="@font/numans"
+                android:maxLines="2"
+                android:paddingTop="10dp"
+                android:paddingEnd="10dp"
+                android:text="Posted on: "
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
         <!--Title of the post-->
-        <TextView
-            android:id="@+id/contentTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="10dp"
-            android:textColor="@color/white"
-            android:textSize="28sp"
-            android:text="Post title"
-            android:fontFamily="@font/numans"
-            android:textStyle="bold"/>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -98,29 +131,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/contentAuthor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/contentContact"
-                android:fontFamily="@font/numans"
-                android:maxLines="2"
-                android:padding="10dp"
-                android:text="author  "
-                android:textColor="@color/white"
-                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/contentDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/contentAuthor"
-                android:fontFamily="@font/numans"
-                android:maxLines="2"
-                android:padding="10dp"
-                android:text="Posted on: "
-                android:textColor="@color/white"
-                android:textStyle="bold" />
 
             <ImageButton
                 android:id="@+id/btnDelete"

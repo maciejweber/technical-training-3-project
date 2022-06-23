@@ -52,7 +52,6 @@ public class PostContentActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
         Intent intent = new Intent(PostContentActivity.this, MainActivity.class);
         startActivity(intent);
     }
@@ -62,18 +61,18 @@ public class PostContentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_content);
 
-//        actionBar = getSupportActionBar();
-//        actionBar.setDisplayShowHomeEnabled(true);
-//        actionBar.setDisplayHomeAsUpEnabled(true);
-
-
         progressDialog = new ProgressDialog(this);
         progressDialog.setTitle("Loading post content...");
 
         postId = getIntent().getStringExtra("postId");
         Log.d(TAG, "onCreate: POST ID= "+postId);
 
+        SharedPreferences mPrefs = getSharedPreferences("My_Pref",0);
+        String token = mPrefs.getString("Authorization", "");
+        String email = mPrefs.getString("Email", "");
 
+        Log.d(TAG, "SharedPreference token: "+token);
+        Log.d(TAG, "SharedPreference email: "+email);
 
         //region init views
         contentWebView = findViewById(R.id.contentWebView);
@@ -106,9 +105,9 @@ public class PostContentActivity extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                deletePost();
                                 Intent intent = new Intent(PostContentActivity.this, MainActivity.class);
                                 startActivity(intent);
+                                deletePost();
                             }
                         });
                 builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -131,31 +130,6 @@ public class PostContentActivity extends AppCompatActivity {
             }
         });
 
-
-        SharedPreferences mPrefs = getSharedPreferences("My_Pref",0);
-        String token = mPrefs.getString("Authorization", "");
-        String email = mPrefs.getString("Email", "");
-        String author = mPrefs.getString("Author", "");
-        Log.d(TAG, "SharedPreference author: "+author);
-        Log.d(TAG, "SharedPreference token: "+token);
-        Log.d(TAG, "SharedPreference email: "+email);
-
-        if(token.equals("")){
-            btnEdit.setVisibility(View.GONE);
-            btnDelete.setVisibility(View.GONE);
-        }else if(email.equals(author))
-        {
-            btnEdit.setVisibility(View.VISIBLE);
-            btnDelete.setVisibility(View.VISIBLE);
-        } else
-        {
-            btnDelete.setVisibility(View.VISIBLE);
-            btnEdit.setVisibility(View.GONE);
-        }
-
-        SharedPreferences preferences = getSharedPreferences("My_Pref", 0);
-//        preferences.edit().remove("Email").apply();
-        preferences.edit().remove("Author").apply();
     }
 
     private void deletePost() {
@@ -220,18 +194,28 @@ public class PostContentActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = mPrefs.edit();
                     editor.putString("Author", ""+author);
                     editor.apply();
-
+                    String email = mPrefs.getString("Email","");
+                    Log.d(TAG, "SharedPreference author: "+author);
                     //set data
 
                     contentTitle.setText(title);
-                    contentCompany.setText("Company name: " + company);
+                    contentCompany.setText("Company: " + company);
                     contentLocation.setText("Location: " + location);
-                    contentCategory.setText("Required language: " + category);
-                    contentSalary.setText("Salary bracket: " + salary_from + "-" + salary_to + "$");
-                    contentContact.setText("Contact:" + contact_email);
+                    contentCategory.setText("Technology: " + category);
+                    contentSalary.setText("Salary: " + salary_from + "-" + salary_to + "$");
+                    contentContact.setText("Contact: " + contact_email);
                     contentAuthor.setText(author);
                     contentDate.setText(created_on);
                     contentWebView.loadDataWithBaseURL(null, content, "text/html", ENCODING, null);
+
+                    if(email.equals(author)){
+                        btnEdit.setVisibility(View.VISIBLE);
+                        btnDelete.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        btnEdit.setVisibility(View.GONE);
+                        btnDelete.setVisibility(View.GONE);
+                    }
 
 //                    }
 

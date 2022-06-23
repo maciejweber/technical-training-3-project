@@ -109,9 +109,9 @@ public class AddPostActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    addNewPost();
                     Intent intent = new Intent(AddPostActivity.this, MainActivity.class);
                     startActivity(intent);
+                    addNewPost();
                 }
             }
         });
@@ -124,9 +124,9 @@ public class AddPostActivity extends AppCompatActivity {
         String salary_to = salary_toET.getText().toString();
         String contact = contactET.getText().toString();
         long location = locationSpinner.getSelectedItemId() + 5;
+        int category = (int) (categorySpinner.getSelectedItemId() + 1);
         ArrayList<Integer> list = new ArrayList<Integer>();
-        list.add(1);
-        list.add(3);
+        list.add(category);
 
         JSONArray array = new JSONArray();
         for(int i = 0; i<list.size(); i++){

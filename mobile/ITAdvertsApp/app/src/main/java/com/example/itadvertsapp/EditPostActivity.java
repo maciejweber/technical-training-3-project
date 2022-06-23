@@ -168,15 +168,15 @@ public class EditPostActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject response) {
 
-                Toast.makeText(EditPostActivity.this, "New post created", Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditPostActivity.this, "Edit successful", Toast.LENGTH_SHORT).show();
                 //Toast.makeText(AddPostActivity.this, "Response "+response, Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                //Toast.makeText(AddPostActivity.this, "Blad: Podaj poprawne dane", Toast.LENGTH_SHORT).show();
-                Toast.makeText(EditPostActivity.this, "Error " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(EditPostActivity.this, "Edit failed. Input correct data", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onErrorResponse: "+error);
             }
         }) {
             @Override

@@ -3,7 +3,9 @@ package com.example.itadvertsapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -42,17 +44,45 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        SharedPreferences preferences = getSharedPreferences("My_Pref", 0);
-        preferences.edit().remove("Authorization").apply();
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        SharedPreferences mPrefs = getSharedPreferences("My_Pref",0);
+        String token = mPrefs.getString("Authorization", "");
+
+        if(!token.equals("")){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setCancelable(true);
+        builder.setTitle("Logging out");
+        builder.setMessage("Are you sure you want to log out?");
+        builder.setPositiveButton("Confirm",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferences preferences = getSharedPreferences("My_Pref", 0);
+                        preferences.edit().remove("Authorization").apply();
+                        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
+                    }
+                });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+        } else
+        {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
-        Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         postsRV = findViewById(R.id.postsRV);
         addBtn = findViewById(R.id.addBtn);
@@ -63,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
         postArrayList = new ArrayList<>();
         postArrayList.clear();
+
 
         loadPosts();
 
@@ -92,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
                 String query = searchEdt.getText().toString().trim();
                 if (query.equals("")){
+                    Toast.makeText(MainActivity.this, "Phrase required to use search", Toast.LENGTH_SHORT).show();
                     loadPosts();
                 }
                 else  {
@@ -212,8 +244,8 @@ public class MainActivity extends AppCompatActivity {
                                     ""+ id,
                                     ""+ title,
                                     ""+ company + " / " + formatted_date,
-                                    "Language: "+category,
-                                    "Salary bracket: "+ salary_from + "-" +salary_to,
+                                    "Technology: "+category,
+                                    "Salary: "+ salary_from + "-" +salary_to,
                                     "",
                                     ""+ location,
                                     ""

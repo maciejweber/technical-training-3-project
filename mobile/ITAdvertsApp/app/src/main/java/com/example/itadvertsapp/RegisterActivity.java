@@ -34,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private static final String TAG = "REGISTER_TAG";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,16 +60,23 @@ public class RegisterActivity extends AppCompatActivity {
                         passwordEditText_register.getText().toString().equals("")||
                         confirmEditText_register.getText().toString().equals("")){
                     Toast.makeText(RegisterActivity.this, "All fields are required", Toast.LENGTH_SHORT).show();
-
-                }else if(!passwordEditText_register.getText().toString().equals(confirmEditText_register.getText().toString())){
+                }else if(!passwordEditText_register.getText().toString().equals(confirmEditText_register.getText().toString()))
+                {
                     Toast.makeText(RegisterActivity.this, "Passwords are not matching", Toast.LENGTH_SHORT).show();
                 }
-                else
+                else if(!emailEditText_register.getText().toString().contains("@"))
                 {
-                    Toast.makeText(RegisterActivity.this, "", Toast.LENGTH_SHORT).show();
-                    Intent intent2 = new Intent(RegisterActivity.this, LoginActivity.class);
+                    Toast.makeText(RegisterActivity.this, "Proper email required (missing @)", Toast.LENGTH_SHORT).show();
+                }else if(passwordEditText_register.getText().length() < 8 ||
+                        confirmEditText_register.getText().length() < 8)
+                {
+                    Toast.makeText(RegisterActivity.this, "Password must at least 8 characters ", Toast.LENGTH_SHORT).show();
+                }else
+                {
                     userRegister();
+                    Intent intent2 = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent2);
+                    Toast.makeText(RegisterActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                 }
             }
         });
